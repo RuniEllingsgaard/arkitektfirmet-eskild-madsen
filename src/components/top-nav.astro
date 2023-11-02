@@ -1,0 +1,96 @@
+---
+
+---
+
+<nav id="js-top-nav" class="hide-menu top-nav">
+	<ul>
+    <li class="gsap-text">Projekter</li>
+    <li class="gsap-text">Om Eskild Madsen</li>
+    <li class="gsap-text">Kontakt</li>
+  </ul>
+  <div>
+    <p class="left">Arkitektfirmaet Eskild Madsen</p>
+    <button id="menu-button" class="center">Menu +</button>
+    <p class="right">Viborg 21.06</p>
+  </div>
+</nav>
+<style>
+
+  .top-nav{
+    padding: 0rem 4rem;
+    color: #fff; 
+  }
+
+  .show-menu{
+    color: #fff;
+    background-color: #1e1e1e;
+    transform: translateY(0px);
+    transition: transform 0.35s ease;
+  }
+
+  .hide-menu{
+    color:black;
+    background-color: #fff;
+    transform: translateY(-400px);
+    transition: all 0.3s ease;
+  }
+
+  ul{
+    font-size: 4rem;
+    padding: 4rem 0rem 4rem 0rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+
+  }
+  li{
+    list-style: none;
+  }
+
+  .show-menu button{
+    color: #fff
+  }
+
+  button{
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+	div{
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { CustomEase } from "gsap/CustomEase";
+  import { RoughEase, ExpoScaleEase } from "gsap/EasePack";
+  gsap.registerPlugin(RoughEase,ExpoScaleEase,CustomEase);
+
+  let menuIsVisible = false;
+  let isAnimated = false;
+  let menuButton = document.getElementById("menu-button");
+  let topNav = document.getElementById("js-top-nav");
+
+  menuButton.addEventListener("click", showMenu)
+
+  function showMenu(){
+    if(!menuIsVisible){
+      topNav.classList.remove("hide-menu");
+      topNav.classList.add("show-menu");
+      menuButton.innerHTML="Luk –"
+      gsap.from(".gsap-text", {y: -60, duration: 0.8, opacity: 0, ease: "power4.out",stagger: 0.08, delay: 0.1,});
+      menuIsVisible = true;
+    }
+    else{
+      topNav.classList.remove("show-menu");
+      topNav.classList.add("hide-menu");
+      menuButton.innerHTML="Menu +"
+      menuIsVisible = false;
+    }
+  }
+
+</script>
